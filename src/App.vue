@@ -1,19 +1,44 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import TheWelcome from "./components/TheWelcome.vue";
+import Api from "@/api/Api.js";
+import { ref } from "vue";
+const api = new Api();
+const isLoading = ref(true);
+const posts = ref(null);
+
+async function init() {
+  try {
+    posts.value = await api.fetchPosts();
+  } catch (e) {
+    console.error(e);
+  } finally {
+    isLoading.value = false;
+  }
+}
+setTimeout(() => {
+  init();
+}, 3000);
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="./assets/logo.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
   </header>
 
-  <main>
-    <TheWelcome />
+  <main class="main">
+    <div v-if="isLoading" class="loader">Loading...</div>
+    <TheWelcome v-else :posts="posts" />
   </main>
 </template>
 

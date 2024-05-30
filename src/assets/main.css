@@ -1,4 +1,4 @@
-@import './base.css';
+@import "./base.css";
 
 #app {
   max-width: 1280px;
@@ -32,4 +32,17 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
+.main {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+.the-welcome {
+  padding: 0 26px;
+  height: 100%;
+  overflow-y: auto;
+}
+.loader {
+  margin: auto;
 }
