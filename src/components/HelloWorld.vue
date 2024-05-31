@@ -1,10 +1,19 @@
 <script setup>
+import InputItem from "@/components/form/InputItem.vue";
+import { ref } from "vue";
+
 defineProps({
   msg: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
+
+const userName = ref("");
+
+function printGreeting() {
+  console.log(`Hello, ${userName}`);
+}
 </script>
 
 <template>
@@ -15,6 +24,10 @@ defineProps({
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
+    <form class="greeting-form" @submit="printGreeting">
+      <InputItem v-model="userName" />
+      <button class="greeting-form__button" type="submit">Say Hello</button>
+    </form>
   </div>
 </template>
 
@@ -40,5 +53,18 @@ h3 {
   .greetings h3 {
     text-align: left;
   }
+}
+.greeting-form {
+  margin: 30px 0;
+}
+.greeting-form__button {
+  margin: 10px 0;
+  padding: 10px 15px;
+  border: none;
+  background-color: hsla(160, 100%, 37%, 1);
+  color: hsla(0, 0%, 100%);
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 3px;
 }
 </style>
